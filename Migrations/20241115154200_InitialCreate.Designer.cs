@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CordiSimple.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241115122306_InitialCreate")]
+    [Migration("20241115154200_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

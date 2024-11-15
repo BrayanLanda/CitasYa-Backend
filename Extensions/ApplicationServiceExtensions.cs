@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CordiSimple.Errors.Global;
 using CordiSimple.Interfaces;
 using CordiSimple.Models;
+using CordiSimple.Seeders;
 using CordiSimple.Services;
 using Microsoft.AspNetCore.Identity;
 
@@ -27,12 +28,12 @@ namespace CordiSimple.Extensions
             services.AddScoped<ITokenRepository, TokenServices>();
             services.AddScoped<IAuthRepository, AuthService>();
             services.AddScoped<IUserRespository, UserService>();
-            // services.AddScoped<IRoomRepository, RoomService>();
-            // services.AddScoped<IRoomTypeRepository, RoomTypeService>();
+            services.AddScoped<IDoctorRepository, DoctorService>();
+            services.AddScoped<IAppointmentRepository, AppointmentService>();
             // services.AddScoped<IBookingRepository, BookingService>();
             // services.AddScoped<IGuestRepository, GuestService>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-            // services.AddScoped<DataSeeder>();
+            services.AddScoped<DataSeeder>();
 
             // Registrar el GlobalExceptionFilter
             services.AddControllers(options =>

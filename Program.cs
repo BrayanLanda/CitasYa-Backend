@@ -1,4 +1,5 @@
 using CordiSimple.Extensions;
+using CordiSimple.Seeders;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,6 @@ builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddSwaggerServices();
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -31,6 +31,12 @@ app.UseCors(x =>
     .AllowAnyMethod()
     .WithOrigins("http://localhost:4200")
 );
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    seeder.SeedDataAsync().Wait();
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
