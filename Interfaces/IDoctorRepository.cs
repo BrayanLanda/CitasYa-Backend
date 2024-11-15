@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CordiSimple.DTOs;
 using CordiSimple.Models;
 
 namespace CordiSimple.Interfaces
@@ -18,7 +19,7 @@ namespace CordiSimple.Interfaces
 
         Task AddAsync(Doctor doctor);
         
-        Task UpdateAsync(Doctor doctor);
+        Task<Doctor> UpdateAsync(int id, DoctorUpdateDto doctorUpdateDto);
 
         Task DeleteAsync(int id);
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CordiSimple.Data;
+using CordiSimple.DTOs;
 using CordiSimple.Errors.General;
 using CordiSimple.Interfaces;
 using CordiSimple.Models;
@@ -36,14 +37,6 @@ namespace CordiSimple.Services
             return doctor;
         }
 
-        // Buscar doctores por especialidad
-        public async Task<IEnumerable<Doctor>> GetBySpecialityAsync(string speciality)
-        {
-            return await _context.Doctors
-                                 .Where(d => d.Speciality.Equals(speciality, StringComparison.OrdinalIgnoreCase))
-                                 .ToListAsync();
-        }
-
         // Validar la disponibilidad de un doctor en una fecha/hora específica
         public async Task<bool> IsAvailableAsync(int doctorId, DateTime date)
         {
@@ -56,20 +49,35 @@ namespace CordiSimple.Services
             return true;
         }
 
-        // Crear un nuevo doctor
+        public async Task<IEnumerable<Doctor>> GetBySpecialityAsync(string speciality)
+        {
+            return await _context.Doctors
+                .Where(g => g.Name.Contains(speciality)|| g.Speciality.Contains(speciality))
+                .ToListAsync();
+        }
+
         public async Task AddAsync(Doctor doctor)
         {
             _context.Doctors.Add(doctor);
             await _context.SaveChangesAsync();
         }
 
-        // Actualizar un doctor existente
-        public async Task UpdateAsync(Doctor doctor)
+       public async Task<Doctor> UpdateAsync(int id, DoctorUpdateDto doctorUpdateDto)
         {
-            _context.Doctors.Update(doctor);
-            await _context.SaveChangesAsync();
-        }
+            var existingGuest = await _context.Doctors.FindAsync(id);
+            if (existingGuest == null)
+            {
+                throw new IdNotFoundException("Doctor", id);
+            }
 
+            // Actualizar solo los campos necesarios
+            existingGuest.Name = doctorUpdateDto.Name;
+            existingGuest.Email = doctorUpdateDto.Email;
+
+             _context.Doctors.Update(existingGuest);
+            await _context.SaveChangesAsync();
+            return existingGuest;
+        }
         // Eliminar un doctor
         public async Task DeleteAsync(int id)
         {

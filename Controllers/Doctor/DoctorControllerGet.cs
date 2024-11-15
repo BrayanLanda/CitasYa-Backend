@@ -42,5 +42,19 @@ namespace CordiSimple.Controllers.Doctor
             var doctor = await _doctorRepository.GetByIdAsync(id);
             return Ok(doctor);
         }
+
+        [HttpGet("search/{keyword}")]
+        [SwaggerOperation(
+        Summary = "Search guests",
+        Description = "Searches for doctor in the database using a keyword. Requires ADMIN role."
+        )]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Tags("doctors")]
+        public async Task<IActionResult> SearchDoctor(string keyword)
+        {
+            var doctors = await _doctorRepository.GetBySpecialityAsync(keyword);
+            return Ok(doctors);
+        }
     }
 }
