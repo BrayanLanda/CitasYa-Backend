@@ -20,7 +20,7 @@ namespace CordiSimple.Interfaces
 
         Task<bool> IsDuplicateAsync(int doctorId, DateTime date);
 
-        Task AddAsync(Appointment appointment);
+        Task<Appointment> CreateAppointmentAsync(Appointment appointment);
 
         Task UpdateAsync(Appointment appointment);
 

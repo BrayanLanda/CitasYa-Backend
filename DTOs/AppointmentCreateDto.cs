@@ -23,5 +23,7 @@ namespace CordiSimple.DTOs
 
         [Required(ErrorMessage = "Status is required.")]
         public bool Status { get; set; }
+
+        public string? Notes { get; set; } 
     }
 }

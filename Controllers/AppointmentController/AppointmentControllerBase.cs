@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CordiSimple.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CordiSimple.Controllers.Appointment
+namespace CordiSimple.Controllers.AppointmentController
 {
     [ApiController]
     [Route("api/v1/appointment")]

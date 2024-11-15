@@ -14,7 +14,7 @@ Este proyecto es una API construida con **ASP.NET Core**, utilizando una arquite
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/BrayanLanda/TechStore.git
+git clone https://github.com/BrayanLanda/CitasYa-Backend
 cd CitasYa-Backend
 ```
 

@@ -81,14 +81,14 @@ namespace CordiSimple.Services
         return true;
     }
 
-    // Crear una nueva cita
-    public async Task AddAsync(Appointment appointment)
+    public async Task<Appointment> CreateAppointmentAsync(Appointment appointment)
     {
         // Validar disponibilidad antes de crear la cita
         await IsDuplicateAsync(appointment.DoctorId, appointment.Date);
 
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
+        return appointment;
     }
 
     // Actualizar una cita existente

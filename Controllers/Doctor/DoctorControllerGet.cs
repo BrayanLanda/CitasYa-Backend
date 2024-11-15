@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CordiSimple.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -44,6 +45,7 @@ namespace CordiSimple.Controllers.Doctor
         }
 
         [HttpGet("search/{keyword}")]
+        [Authorize(Roles = "USER")]
         [SwaggerOperation(
         Summary = "Search guests",
         Description = "Searches for doctor in the database using a keyword. Requires ADMIN role."

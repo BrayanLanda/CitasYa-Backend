@@ -19,6 +19,7 @@ namespace CordiSimple.Controllers.Doctor
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "ADMIN")]
         [SwaggerOperation(
             Summary = "Update doctor",
             Description = "Updates the details of an existing doctor."
